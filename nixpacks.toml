@@ -2,10 +2,13 @@
 nixPkgs = ["nodejs", "yarn"]
 
 [phases.install]
+cmds = ["yarn install"]
+
+[phases.codegen]
 cmds = [
-    "yarn install",
     "cd apps/backend",
-    "echo 'DB_NAME=$DB_NAME' > .env",
+    "echo 'NODE_ENV=production' > env",
+    "echo 'DB_NAME=$DB_NAME' >> .env",
     "echo 'DATABASE_URL=$DATABASE_URL' >> .env",
     "echo 'REDIS_URL=$REDIS_URL' >> .env",
     "echo 'STORE_CORS=$STORE_CORS' >> .env",
