@@ -19,6 +19,7 @@ cmds = [
     "echo 'RESEND_FROM_EMAIL=$RESEND_FROM_EMAIL' >> .env",
     "echo 'ALGOLIA_APP_ID=$ALGOLIA_APP_ID' >> .env",
     "echo 'ALGOLIA_API_KEY=$ALGOLIA_API_KEY' >> .env",
+    "cat .env",
     "yarn medusa db:create",
     "yarn medusa db:migrate",
     "yarn run seed",
