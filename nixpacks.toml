@@ -31,7 +31,7 @@ cmds = [
 cmds = ["yarn build"]
 
 [start]
-cmd = "yarn start"
+cmd = "cd apps/backend && yarn start"
 
 [variables]
 NODE_ENV = "production"
