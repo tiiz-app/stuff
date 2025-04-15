@@ -1,0 +1,36 @@
+[phases.setup]
+nixPkgs = ["nodejs", "yarn"]
+
+[phases.install]
+cmds = [
+    "yarn install",
+    "cd apps/backend",
+    "echo 'DATABASE_URL=$DATABASE_URL' > .env",
+    "echo 'REDIS_URL=$REDIS_URL' >> .env",
+    "echo 'STORE_CORS=$STORE_CORS' >> .env",
+    "echo 'ADMIN_CORS=$ADMIN_CORS' >> .env",
+    "echo 'AUTH_CORS=$AUTH_CORS' >> .env",
+    "echo 'JWT_SECRET=$JWT_SECRET' >> .env",
+    "echo 'COOKIE_SECRET=$COOKIE_SECRET' >> .env",
+    "echo 'STRIPE_SECRET_API_KEY=$STRIPE_SECRET_API_KEY' >> .env",
+    "echo 'STRIPE_CONNECTED_ACCOUNTS_WEBHOOK_SECRET=$STRIPE_CONNECTED_ACCOUNTS_WEBHOOK_SECRET' >> .env",
+    "echo 'RESEND_API_KEY=$RESEND_API_KEY' >> .env",
+    "echo 'RESEND_FROM_EMAIL=$RESEND_FROM_EMAIL' >> .env",
+    "echo 'ALGOLIA_APP_ID=$ALGOLIA_APP_ID' >> .env",
+    "echo 'ALGOLIA_API_KEY=$ALGOLIA_API_KEY' >> .env",
+    "yarn medusa db:create",
+    "yarn medusa db:migrate",
+    "yarn run seed",
+    "yarn generate:oas",
+    "cd ../..",
+    "yarn codegen",
+]
+
+[phases.build]
+cmds = ["yarn build"]
+
+[start]
+cmd = "yarn start"
+
+[variables]
+NODE_ENV = "production"
