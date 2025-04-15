@@ -5,7 +5,13 @@ nixPkgs = ["nodejs", "yarn"]
 cmds = ["yarn install"]
 
 [phases.build]
-cmds = ["yarn codegen", "yarn build"]
+cmds = [
+    "cd apps/backend",
+    "yarn generate:oas",
+    "cd ../..",
+    "yarn codegen",
+    "yarn build",
+]
 
 [start]
 cmds = [
